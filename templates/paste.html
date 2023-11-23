@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paste</title>
+    <script>
+        function copyURL() {
+            const el = document.createElement('textarea');
+            el.value = window.location.href;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            alert('URL copied to clipboard!');
+        }
+    </script>
+</head>
+<body>
+    <h1>{{ name }}</h1>
+    <pre>{{ content }}</pre>
+    <button onclick="copyURL()">Copy URL to Clipboard</button>
+    <br>
+    <form action="{{ url_for('view_paste', name=name) }}" method="post">
+        <input type="submit" value="Edit Paste">
+    </form>
+    <br>
+    <a href="{{ url_for('copieur') }}">Create another paste</a>
+    <br>
+    <a href="{{ url_for('all_pastes') }}">View all pastes</a>
+</body>
+</html>
